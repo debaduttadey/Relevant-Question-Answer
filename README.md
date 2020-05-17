@@ -14,6 +14,29 @@ An e-commerce company wants to build an algorithm to retrieve top 5 Question and
 ## Data
 Data was provided in NDJson format. Data had some issues when directly inserted into R. Hence data was converted into csv in python. All other steps has been performed in R.
 
+## Project Architecture
 
- ![picture alt](http://via.placeholder.com/200x150 "Title is optional")
+![picture alt](Images/ProjectArchitecture.jpeg)
+
+###	Input Layer
+User Question and Question bank both are considered as input. 
+-	User question/Keywords is the text or question that user will provide as an input. 
+-	Question bank means the existing question and answer set that is already present. Later User question will be compared with this question bank to find relevant Question and answer.
+
+###	 Preprocessing 
+Before considering to take text as input, text needs to be cleaned. Process of cleaning text includes:
+-	Removal of Stop words (common words occur in a sentence)
+-	Elimination of URLs (with https or ftp [absolute URLs] and broken URLs (without https or ftp]).
+-	Exclusion of emails.
+-	Deletion unwanted words
+-	Word spell check and correction
+-	Word stemming
+
+###	Model
+Model is a function “QuestionSearch” which computes cosine similarity between user Questions/Keywords and each Question bank to find the similar questions. 
+
+###	Final Output
+Final Output is the relevant question and answer shown based on the user input/keywords. Top five results will be shown with decreasing order of cosine similarity. 
+
+
 
