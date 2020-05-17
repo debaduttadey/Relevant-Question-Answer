@@ -32,22 +32,48 @@ Before considering to take text as input, text needs to be cleaned. Process of c
 -	Word spell check and correction 
 -	Word stemming
 
+
 #### Data Dictionary
 Data dictionary was created from the step ***Word spell check and correction*** in preprocessing step. 
 Function ***hunspell_suggest*** in package ***hunspell*** is used to suggest the correct word for the incorrect word. ***Jarowinkler*** distance from package ***RecordLinkage*** is also used to find out how close is the correct word compared to incorrect word. Cut off value ***0.971428571428571*** is considered. Any weight above ***0.971428571428571*** will be considered for word replacement. Manual intervention was also done to ensure the replacement of correct words. Words representing company or model name had to be manually discarded to be entering for correct spelling.Correcting incorrect model name or company name was manually done.
 
-***[Please refer script]: Script/01.EDA.R***
+#### Feature Engineering
+- Added new column called “QuestionTypeOE”
+- Correct the misspelled words using hunspell package
+- Some words are manually changed
+- Create table for wrong and correct words
+  - If any words are left to be corrected, they can be replaced using the Findreplace function in DataCombine package
+- Add columns Question length, Question Word Count, Answer length, Answer Word Count.
+- Sentiment analysis 
+  - Average sentiment and standard deviation of question and answer column.
+  - Replacing the Na values with median 
+  - Create a column for sentiment words and there count
+- Change the variables of answer type : NO to N, YES to Y, NaN to NotApp
+- Create a normalize function and normalizing all the columns
+- Partition of data into train and test datasets on basis of AnswerType
+- sampling using the Caret package
+- Choosing the accurate model
+
+***Please refer script [01.EDA.R](Script/01.EDA.R "01.EDA.R title")***
+
 #### Predicting AnswerType
 As part of EDA, we have predicted for answertype where answer type had ***"?"*** value. Here NaN is also taken as a variable.
+
+***Please refer script [02.EDA.R](Script/02.EDA.R "02.EDA.R title")***
 
 #### CleanText_Analysis Function
 This function has been created from steps of Preprocessing the provided data. This function is only used for user input. It also helps in correcting incorrect words using the data dictionary.
 
+***Please refer script [04.Function For Text Analysis.R](Script/04.Function%20For%20Text%20Analysis.r "04.Function For Text Analysis.R title")***
+
 ###	Model
 Model is a function ***QuestionSearch*** which computes cosine similarity between user Questions/Keywords and each Question bank to find the similar questions. 
+
+***Please refer script [05.Model.R](Script/05.Model.r "05.Model.R title")***
 
 ###	Final Output
 Final Output is the relevant question and answer shown based on the user input/keywords. Top five results will be shown with decreasing order of cosine similarity. 
 
+***Please refer script [06.Shiny.R](Script/06.Shiny.r "06.Shiny.R title")***
 
 
